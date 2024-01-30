@@ -2,17 +2,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
-
 import ProgressBar from "react-percent-bar";
-
-
 import Styles from './PasswordTable.module.css'
 import InstagramLogo from '../../../../assets/instagramLogo.webp'
 import Category from "../../MenuSection/Categories/Category/Category";
+import {useState} from "react";
 
 const PasswordTable = () => {
 
     const perc = 90;
+    const [open, setOpen] = useState(false)
 
 
     return (
@@ -30,11 +29,14 @@ const PasswordTable = () => {
                 <tbody>
                 <tr>
                     <td className={Styles.website}>
-                        <img className={Styles.icon} src={InstagramLogo} alt=""/>
-                        <div className={Styles.content}>
-                            <h5>Instagram</h5>
-                            <a href="http://instagram.com">http://instagram.com</a>
+                        <div className={Styles.websiteContainer}>
+                            <img className={Styles.icon} src={InstagramLogo} alt=""/>
+                            <div className={Styles.content}>
+                                <h5>Instagram</h5>
+                                <a href="http://instagram.com">http://instagram.com</a>
+                            </div>
                         </div>
+
 
                     </td>
                     <td className={Styles.categories}>
@@ -70,7 +72,18 @@ const PasswordTable = () => {
                                 height="15px"
                             />
                             {perc}%
-                            <span className={Styles.more}><FontAwesomeIcon icon={faEllipsisVertical} /></span>
+                            <div className={Styles.options}>
+                                <span onClick={() => setOpen(!open)} className={Styles.more}><FontAwesomeIcon icon={faEllipsisVertical} /></span>
+                                {open && (
+                                    <div className={Styles.dropdown}>
+                                        <ul>
+                                            <li>Edit</li>
+                                            <li>Delete</li>
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+
 
                         </div>
                     </td>

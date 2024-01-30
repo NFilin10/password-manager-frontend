@@ -4,7 +4,7 @@
     gap: 25px;
     bottom: 0;
     position: fixed;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 
@@ -30,4 +30,33 @@
 .more {
     margin-left: 30px;
     font-size: 18px;
+}
+
+.options{
+    display: flex;
+    gap: 15px;
+}
+
+li{
+    list-style: none;
+}
+
+.dropdown{
+    margin-top: -40px;
+    background-color: #4F535E;
+    width: 95px;
+    position: relative;
+
+}
+
+ul{
+    padding: 5px;
+
+}
+
+.dropdown ul{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-size: 17px;
 }
