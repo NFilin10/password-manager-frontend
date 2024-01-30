@@ -1,7 +1,7 @@
 
 .categoryWrapper{
-    margin-top: 12px;
-    margin-left: 12px;
+    margin-top: 5px;
+    margin-left: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,7 +10,7 @@
 }
 
 .categoryName h6{
-    font-size: 16px;
+    font-size: 14px;
     color: #BA9117;
 }
 
@@ -22,4 +22,5 @@
 
 span{
     color: white;
+    font-size: 14px;
 }

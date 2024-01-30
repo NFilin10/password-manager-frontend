@@ -1,5 +1,7 @@
 import Styles from "./Profile.module.css"
 import ProfileLogo from "../../../../assets/profileLogo.png"
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 
@@ -11,7 +13,7 @@ const Profile = () => {
             </div>
             <div className={Styles.content}>
                 <h4>Name Surname</h4>
-                <span>:</span>
+                <span className={Styles.more}><FontAwesomeIcon icon={faEllipsisVertical} /></span>
             </div>
         </div>
     )
