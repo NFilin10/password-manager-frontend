@@ -1,0 +1,43 @@
+
+.logoButtonWrapper{
+    /*margin-left: 45px;*/
+    padding-top: 30px;
+}
+
+.logoBox{
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.content h3{
+    color: white;
+    font-size: 25px;
+}
+
+.content h6{
+    color: #4F535E;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.logoWrapper img{
+    width: 80px;
+    height: 80px;
+}
+
+.buttonWrapper{
+    margin-top: 45px;
+}
+
+.buttonWrapper button{
+    width: 100%;
+    background-color: #3C3BFF;
+    border: none;
+    height: 35px;
+    color: white;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
