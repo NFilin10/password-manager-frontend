@@ -12,3 +12,9 @@
 .menuSectionContainer{
     width: 85%;
 }
+
+@media (max-width: 768px) {
+    .menuSectionWrapper {
+        display: none;
+    }
+}

@@ -51,15 +51,15 @@ const PasswordTable = () => {
                     <td className={Styles.username}>
                         <div className={Styles.usernameWrapper}>
                             <p>username@usaer</p>
-                            <FontAwesomeIcon icon={faCopy} />
+                            <FontAwesomeIcon icon={faCopy} className={Styles.helper} />
                         </div>
 
                     </td>
                     <td className={Styles.password}>
                         <div className={Styles.passwordWrapper}>
                             <p>*********</p>
-                            <FontAwesomeIcon icon={faEye} />
-                            <FontAwesomeIcon icon={faCopy} />
+                            <FontAwesomeIcon icon={faEye} className={Styles.helper}/>
+                            <FontAwesomeIcon icon={faCopy} className={Styles.helper}/>
                         </div>
 
                     </td>
