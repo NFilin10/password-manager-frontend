@@ -1,5 +1,7 @@
 import LogoButton from "./LogoButton/LogoButton";
+import Categories from "./Categories/Categories";
 import Styles from './MenuSection.module.css'
+
 
 
 const MenuSection = () => {
@@ -7,6 +9,7 @@ const MenuSection = () => {
         <div className={Styles.menuSectionWrapper}>
             <div className={Styles.menuSectionContainer}>
                 <LogoButton/>
+                <Categories/>
             </div>
         </div>
     )

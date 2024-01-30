@@ -1,0 +1,25 @@
+
+.categoryWrapper{
+    margin-top: 12px;
+    margin-left: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+
+.categoryName h6{
+    font-size: 16px;
+    color: #BA9117;
+}
+
+.categoryName{
+    background-color: #2A2B2F;
+    padding: 8px 23px 8px 23px;
+    border-radius: 10px;
+}
+
+span{
+    color: white;
+}

@@ -1,0 +1,19 @@
+
+.categoriesWrapper{
+    margin-top: 60px;
+}
+
+.categoryAdd{
+    display: flex;
+    justify-content: space-between;
+}
+
+.categoryAdd h4{
+    font-size: 19px;
+    color: #93979D;
+}
+.addCategory span{
+    color: #93979D;
+    font-size: 19px;
+
+}
