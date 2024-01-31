@@ -6,12 +6,34 @@ import ProgressBar from "react-percent-bar";
 import Styles from './PasswordTable.module.css'
 import InstagramLogo from '../../../../assets/instagramLogo.webp'
 import Category from "../../MenuSection/Categories/Category/Category";
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 const PasswordTable = () => {
 
     const perc = 90;
     const [open, setOpen] = useState(false)
+
+
+    const menuRef = useRef();
+    const imgRef = useRef();
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                menuRef.current &&
+                !menuRef.current.contains(event.target) &&
+                imgRef.current &&
+                !imgRef.current.contains(event.target)
+            ) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
 
     return (
@@ -73,13 +95,11 @@ const PasswordTable = () => {
                             />
                             {perc}%
                             <div className={Styles.options}>
-                                <span onClick={() => setOpen(!open)} className={Styles.more}><FontAwesomeIcon icon={faEllipsisVertical} /></span>
+                                <span ref={imgRef} onClick={() => setOpen(!open)} className={Styles.more}><FontAwesomeIcon icon={faEllipsisVertical} /></span>
                                 {open && (
-                                    <div className={Styles.dropdown}>
-                                        <ul>
-                                            <li>Edit</li>
-                                            <li>Delete</li>
-                                        </ul>
+                                    <div ref={menuRef} className={Styles.dropdown}>
+                                        <li>Edit</li>
+                                        <li>Delete</li>
                                     </div>
                                 )}
                             </div>
