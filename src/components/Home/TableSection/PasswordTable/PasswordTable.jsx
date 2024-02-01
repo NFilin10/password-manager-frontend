@@ -1,16 +1,34 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCopy } from '@fortawesome/free-solid-svg-icons'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
+import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCopy, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import ProgressBar from "react-percent-bar";
-import Styles from './PasswordTable.module.css'
-import InstagramLogo from '../../../../assets/instagramLogo.webp'
+import Styles from './PasswordTable.module.css';
+import InstagramLogo from '../../../../assets/instagramLogo.webp';
 import Category from "../../MenuSection/Categories/Category/Category";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const PasswordTable = () => {
     const perc = 90;
     const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
+    const [passwords, setPasswords] = useState([]);
+    const [passwordVisibility, setPasswordVisibility] = useState({});
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/`)
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                setPasswords(data);
+            });
+    }, []);
+
+    const togglePasswordVisibility = (index) => {
+        setPasswordVisibility(prevVisibility => ({
+            ...prevVisibility,
+            [index]: !prevVisibility[index]
+        }));
+    };
 
     const menuRef = useRef();
 
@@ -31,15 +49,9 @@ const PasswordTable = () => {
         setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
     };
 
-    const [passwords, setPasswords] = useState([]);
-    useEffect(() => {
-        fetch(`http://localhost:8080/`)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                setPasswords(data);
-            });
-    }, []);
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text);
+    };
 
     return (
         <div className={Styles.passwordTableWrapper}>
@@ -78,15 +90,19 @@ const PasswordTable = () => {
                         <td className={Styles.username}>
                             <div className={Styles.usernameWrapper}>
                                 <p>{password.login}</p>
-                                <FontAwesomeIcon icon={faCopy} className={Styles.helper} />
+                                <FontAwesomeIcon icon={faCopy} className={Styles.helper} onClick={() => copyToClipboard(password.login)} />
                             </div>
                         </td>
 
                         <td className={Styles.password}>
                             <div className={Styles.passwordWrapper}>
-                                <p>{password.password}</p>
-                                <FontAwesomeIcon icon={faEye} className={Styles.helper} />
-                                <FontAwesomeIcon icon={faCopy} className={Styles.helper} />
+                                <p>{passwordVisibility[index] ? password.password : '*'.repeat(password.password.length)}</p>
+                                <FontAwesomeIcon
+                                    icon={passwordVisibility[index] ? faEyeSlash : faEye}
+                                    className={Styles.helper}
+                                    onClick={() => togglePasswordVisibility(index)}
+                                />
+                                <FontAwesomeIcon icon={faCopy} className={Styles.helper} onClick={() => copyToClipboard(password.password)} />
                             </div>
                         </td>
 
