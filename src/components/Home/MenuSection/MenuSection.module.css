@@ -2,7 +2,6 @@
 
 .menuSectionWrapper{
     width: 20%;
-    height: 100vh;
     background-color: #212226;
     display: flex;
     flex-direction: column;
