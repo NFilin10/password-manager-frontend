@@ -1,10 +1,16 @@
-
-
-import Styles from './LogoButton.module.css'
-import AppLogo from "../../../../assets/logo.png"
-
+// LogoButton.js
+import React, { useState } from 'react';
+import Styles from './LogoButton.module.css';
+import AppLogo from '../../../../assets/logo.png';
+import NewPasswordForm from './NewPasswordForm/NewPasswordForm';
 
 const LogoButton = () => {
+    const [showForm, setShowForm] = useState(false);
+
+    const handleForm = () => {
+        setShowForm(true);
+    };
+
     return (
         <div className={Styles.logoButtonWrapper}>
             <div className={Styles.logoBox}>
@@ -18,10 +24,13 @@ const LogoButton = () => {
             </div>
 
             <div className={Styles.buttonWrapper}>
-                <button>add password</button>
+                <button onClick={handleForm}>add password</button>
             </div>
-        </div>
-    )
-}
 
-export default LogoButton
+            {showForm && <NewPasswordForm onClose={() => setShowForm(false)} />}
+            {showForm && <div className={Styles.backdrop}></div>}
+        </div>
+    );
+};
+
+export default LogoButton;
