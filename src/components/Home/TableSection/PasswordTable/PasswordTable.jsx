@@ -21,7 +21,7 @@ const PasswordTable = () => {
                 console.log(data);
                 setPasswords(data);
             });
-    }, []);
+    }, [passwords]);
 
     const togglePasswordVisibility = (index) => {
         setPasswordVisibility(prevVisibility => ({

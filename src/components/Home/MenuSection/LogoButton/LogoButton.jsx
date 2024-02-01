@@ -1,5 +1,5 @@
 // LogoButton.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Styles from './LogoButton.module.css';
 import AppLogo from '../../../../assets/logo.png';
 import NewPasswordForm from './NewPasswordForm/NewPasswordForm';
@@ -11,8 +11,15 @@ const LogoButton = () => {
         setShowForm(true);
     };
 
+    const handleCloseForm = () => {
+        setShowForm(false);
+    };
+
+
     return (
         <div className={Styles.logoButtonWrapper}>
+            {showForm && <div className={Styles.activeModalOverlay}></div>}
+
             <div className={Styles.logoBox}>
                 <div className={Styles.logoWrapper}>
                     <img src={AppLogo} alt=""/>
@@ -27,8 +34,9 @@ const LogoButton = () => {
                 <button onClick={handleForm}>add password</button>
             </div>
 
-            {showForm && <NewPasswordForm onClose={() => setShowForm(false)} />}
-            {showForm && <div className={Styles.backdrop}></div>}
+            <div className={Styles.modalContent}>
+                {showForm && <NewPasswordForm onClose={handleCloseForm} />}
+            </div>
         </div>
     );
 };

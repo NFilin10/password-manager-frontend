@@ -4,16 +4,21 @@
     position: relative;
 }
 
-.backdrop {
+
+.activeModalOverlay{
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for darkness */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 999; /* Ensure it's above other content */
+    z-index: 1000;
 }
 
+.modalContent {
+    position: relative;
+    z-index: 1001; /* Ensure the modal content is on top of the overlay */
+}
 
 
 
