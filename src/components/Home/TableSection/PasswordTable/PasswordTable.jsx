@@ -7,12 +7,16 @@ import Styles from './PasswordTable.module.css';
 import InstagramLogo from '../../../../assets/instagramLogo.webp';
 import Category from "../../MenuSection/Categories/Category/Category";
 import { useEffect, useRef } from "react";
+import facebookIcon from "../../../../assets/facebook.png"
+
 
 const PasswordTable = () => {
     const perc = 90;
     const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
     const [passwords, setPasswords] = useState([]);
     const [passwordVisibility, setPasswordVisibility] = useState({});
+
+    const logos = {"facebook" : facebookIcon, "instagram" : InstagramLogo}
 
     useEffect(() => {
         fetch(`http://localhost:8080/`)
@@ -70,7 +74,7 @@ const PasswordTable = () => {
                     <tr key={index}>
                         <td className={Styles.website}>
                             <div className={Styles.websiteContainer}>
-                                <img className={Styles.icon} src={InstagramLogo} alt="" />
+                                <img className={Styles.icon} src={logos[password.logo]} alt="" />
                                 <div className={Styles.content}>
                                     <h5>{password.service_name}</h5>
                                     <a href={password.link}>{password.link}</a>

@@ -18,7 +18,8 @@ const NewPasswordForm = ({ onClose }) => {
             website: website,
             webLink: link,
             login: login,
-            password: password
+            password: password,
+            logo: logo
         };
 
         console.log("data ", data);
@@ -95,10 +96,8 @@ const NewPasswordForm = ({ onClose }) => {
                                         onChange={(e) => setLogo(e.target.value)}
                                     >
                                         <option value="">Select logo</option>
-                                        <option value="logo1"></option>
-                                        <option value="logo2"></option>
-                                        <option value="logo3"></option>
-                                        {/* Add more options as needed */}
+                                        <option value="Instagram">Instagram</option>
+                                        <option value="Facebook">Facebook</option>
                                     </select>
                                     {/*{logo && <img src={img} alt="Logo" />}*/}
                                 </div>
@@ -119,7 +118,7 @@ const NewPasswordForm = ({ onClose }) => {
                             </div>
                         </div>
 
-                        <button onClick={onClose} type="submit">Add Password</button>
+                        <button onClick={handleSubmit} type="submit">Add Password</button>
                     </form>
                 </div>
             </div>
