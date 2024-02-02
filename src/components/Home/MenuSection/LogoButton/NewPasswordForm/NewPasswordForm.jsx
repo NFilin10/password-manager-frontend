@@ -2,6 +2,9 @@
 import React, { useState } from 'react';
 import img from '../../../../../assets/instagramLogo.webp';
 import Styles from './NewPasswordForm.module.css';
+import formImg from '../../../../../assets/form.jpeg';
+
+
 
 const NewPasswordForm = ({ onClose }) => {
     const [website, setWebsite] = useState('');
@@ -44,7 +47,7 @@ const NewPasswordForm = ({ onClose }) => {
             <div className={Styles.formWrapper}>
                 <button className={Styles.closeButton} onClick={onClose}>Close</button> {/* Close button */}
                 <div className={Styles.formImg}>
-                    test
+                    <img src={formImg} alt=""/>
                 </div>
                 <div className={Styles.formContainer}>
                     <h1>Add new password</h1>
@@ -90,7 +93,6 @@ const NewPasswordForm = ({ onClose }) => {
 
                             <div className={Styles.bottom}>
                                 <div>
-                                    <label>Logo:</label>
                                     <select
                                         value={logo}
                                         onChange={(e) => setLogo(e.target.value)}
@@ -103,7 +105,6 @@ const NewPasswordForm = ({ onClose }) => {
                                 </div>
 
                                 <div>
-                                    <label>Category:</label>
                                     <select
                                         value={category}
                                         onChange={(e) => setCategory(e.target.value)}
@@ -117,8 +118,10 @@ const NewPasswordForm = ({ onClose }) => {
                                 </div>
                             </div>
                         </div>
+                        <div className={Styles.buttonWrapper}>
+                            <button onClick={handleSubmit} type="submit">Add Password</button>
 
-                        <button onClick={handleSubmit} type="submit">Add Password</button>
+                        </div>
                     </form>
                 </div>
             </div>
