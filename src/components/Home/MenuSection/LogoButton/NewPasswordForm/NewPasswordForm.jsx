@@ -56,6 +56,7 @@ const NewPasswordForm = ({ onClose }) => {
                             <div className={Styles.upper}>
                                 <div>
                                     <input
+                                        className={Styles.formInput}
                                         placeholder={"Website"}
                                         type="text"
                                         value={website}
@@ -64,6 +65,7 @@ const NewPasswordForm = ({ onClose }) => {
                                 </div>
                                 <div>
                                     <input
+                                        className={Styles.formInput}
                                         placeholder={"Link"}
                                         type="text"
                                         value={link}
@@ -75,6 +77,7 @@ const NewPasswordForm = ({ onClose }) => {
                             <div className={Styles.mid}>
                                 <div>
                                     <input
+                                        className={Styles.formInput}
                                         placeholder={"Login"}
                                         type="text"
                                         value={login}
@@ -83,6 +86,7 @@ const NewPasswordForm = ({ onClose }) => {
                                 </div>
                                 <div>
                                     <input
+                                        className={Styles.formInput}
                                         placeholder={"Password"}
                                         type="password"
                                         value={password}
@@ -119,7 +123,7 @@ const NewPasswordForm = ({ onClose }) => {
                             </div>
                         </div>
                         <div className={Styles.buttonWrapper}>
-                            <button onClick={handleSubmit} type="submit">Add Password</button>
+                            <button className={Styles.submitBtn} onClick={handleSubmit} type="submit">Add Password</button>
 
                         </div>
                     </form>

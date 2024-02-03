@@ -6,14 +6,53 @@
 .categoryAdd{
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 .categoryAdd h4{
     font-size: 19px;
     color: #93979D;
 }
+
+.categoryAdd1{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.categoryAdd1 h4{
+    font-size: 19px;
+    color: #93979D;
+}
+
+
 .addCategory span{
     color: #93979D;
     font-size: 19px;
 
+}
+
+.addCategory{
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.addCategory button{
+    width: 40%;
+    height: 25px;
+    background-color: #3C3BFF;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+
+
+}
+
+.categoryInput{
+    height: 30px;
 }
