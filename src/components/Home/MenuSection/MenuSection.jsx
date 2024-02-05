@@ -5,11 +5,11 @@ import Styles from './MenuSection.module.css'
 
 
 
-const MenuSection = () => {
+const MenuSection = ({ fetchPasswords }) => {
     return (
         <div className="menuSectionWrapper">
             <div className={Styles.menuSectionContainer}>
-                <LogoButton/>
+                <LogoButton fetchPasswords={fetchPasswords}/>
                 <Categories/>
                 <Profile/>
             </div>

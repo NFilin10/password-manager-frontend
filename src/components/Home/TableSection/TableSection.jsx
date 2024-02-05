@@ -5,7 +5,7 @@ import {faBars, faEye} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
-const TableSection = () => {
+const TableSection = ({ fetchPasswords, passwords }) => {
     const [clickCount, setClickCount] = useState(0);
 
     function openMenu() {
@@ -31,7 +31,7 @@ const TableSection = () => {
             </div>
             <div className={Styles.tableSectionContainer}>
                 <h1>All passwords</h1>
-                <PasswordTable />
+                <PasswordTable fetchPasswords={fetchPasswords} passwords={passwords}/>
             </div>
         </div>
     );

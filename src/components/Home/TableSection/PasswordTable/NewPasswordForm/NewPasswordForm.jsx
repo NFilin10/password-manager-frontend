@@ -6,7 +6,7 @@ import formImg from '../../../../../assets/form.jpeg';
 
 
 
-const NewPasswordForm = ({ onClose }) => {
+const NewPasswordForm = ({ onClose, fetchPasswords }) => {
     const [website, setWebsite] = useState('');
     const [link, setLink] = useState('');
     const [login, setLogin] = useState('');
@@ -25,15 +25,15 @@ const NewPasswordForm = ({ onClose }) => {
             logo: logo
         };
 
-        console.log("data ", data);
-
         fetch("http://localhost:8080/add", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
             body: JSON.stringify(data)
         })
-            .then(response => {
-                console.log(response.data);
+            .then(response => response.json())
+            .then(newPassword => {
+                onClose(); // Close the form
+                fetchPasswords();
 
             })
             .catch(e => {
@@ -41,6 +41,7 @@ const NewPasswordForm = ({ onClose }) => {
                 console.log("error");
             });
     };
+
 
     return (
         <>

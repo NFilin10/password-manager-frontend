@@ -10,22 +10,17 @@ import { useEffect, useRef } from "react";
 import facebookIcon from "../../../../assets/facebook.png"
 
 
-const PasswordTable = () => {
+const PasswordTable = ({ fetchPasswords, passwords }) => {
     const perc = 90;
     const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
-    const [passwords, setPasswords] = useState([]);
     const [passwordVisibility, setPasswordVisibility] = useState({});
 
     const logos = {"facebook" : facebookIcon, "instagram" : InstagramLogo}
 
     useEffect(() => {
-        fetch(`http://localhost:8080/`)
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                setPasswords(data);
-            });
-    }, [passwords]);
+        fetchPasswords();
+
+    }, []);
 
     const togglePasswordVisibility = (index) => {
         setPasswordVisibility(prevVisibility => ({
