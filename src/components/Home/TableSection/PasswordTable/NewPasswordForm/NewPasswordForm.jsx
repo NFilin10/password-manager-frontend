@@ -1,18 +1,33 @@
 // NewPasswordForm.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import img from '../../../../../assets/instagramLogo.webp';
 import Styles from './NewPasswordForm.module.css';
 import formImg from '../../../../../assets/form.jpeg';
-
-
 
 const NewPasswordForm = ({ onClose, fetchPasswords }) => {
     const [website, setWebsite] = useState('');
     const [link, setLink] = useState('');
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
-    const [category, setCategory] = useState('');
+    const [categories, setCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const [logo, setLogo] = useState('');
+
+    useEffect(() => {
+        getCategories();
+    }, []);
+
+    const getCategories = () => {
+        fetch(`http://localhost:8080/categories`, {
+            credentials: 'include'
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                setCategories(data);
+            })
+            .catch(error => console.error('Error fetching passwords:', error));
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +37,8 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
             webLink: link,
             login: login,
             password: password,
-            logo: logo
+            logo: logo,
+            categories: selectedCategories
         };
 
         fetch("http://localhost:8080/add", {
@@ -35,7 +51,6 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
             .then(newPassword => {
                 onClose(); // Close the form
                 fetchPasswords();
-
             })
             .catch(e => {
                 console.log(e);
@@ -43,13 +58,12 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
             });
     };
 
-
     return (
         <>
             <div className={Styles.formWrapper}>
                 <button className={Styles.closeButton} onClick={onClose}>Close</button> {/* Close button */}
                 <div className={Styles.formImg}>
-                    <img src={formImg} alt=""/>
+                    <img src={formImg} alt="" />
                 </div>
                 <div className={Styles.formContainer}>
                     <h1>Add new password</h1>
@@ -112,21 +126,18 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
 
                                 <div>
                                     <select
-                                        value={category}
-                                        onChange={(e) => setCategory(e.target.value)}
+                                        multiple
+                                        value={selectedCategories}
+                                        onChange={(e) => setSelectedCategories(Array.from(e.target.selectedOptions, option => option.value))}
                                     >
-                                        <option value="">Select category</option>
-                                        <option value="social">Social</option>
-                                        <option value="finance">Finance</option>
-                                        <option value="work">Work</option>
-                                        {/* Add more options as needed */}
+                                        <option value="">Select categories</option>
+                                        {categories.map(category => <option key={category.category_name} value={category.category_name}>{category.category_name}</option>)}
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div className={Styles.buttonWrapper}>
-                            <button className={Styles.submitBtn} onClick={handleSubmit} type="submit">Add Password</button>
-
+                            <button className={Styles.submitBtn} type="submit">Add Password</button>
                         </div>
                     </form>
                 </div>

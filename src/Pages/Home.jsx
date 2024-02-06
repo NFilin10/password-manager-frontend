@@ -12,6 +12,7 @@ function Home() {
         fetch(`http://localhost:8080/`)
             .then((res) => res.json())
             .then((data) => {
+                console.log(data)
                 setPasswords(data);
             })
             .catch(error => console.error('Error fetching passwords:', error));

@@ -79,12 +79,12 @@ const PasswordTable = ({ fetchPasswords, passwords }) => {
 
                         <td className={Styles.categories}>
                             <div className={Styles.categoriesWrapper}>
-                                <Category categoryName={{ name: "Art" }} />
-                                <Category categoryName={{ name: "School" }} />
-                                <Category categoryName={{ name: "Art" }} />
-                                <Category categoryName={{ name: "Art" }} />
+                                {password.categories.map((category, index) => (
+                                    <Category key={index} categoryName={category} />
+                                ))}
                             </div>
                         </td>
+
 
                         <td className={Styles.username}>
                             <div className={Styles.usernameWrapper}>
