@@ -11,7 +11,6 @@ import facebookIcon from "../../../../assets/facebook.png"
 
 
 const PasswordTable = ({ fetchPasswords, passwords }) => {
-    const perc = 90;
     const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
     const [passwordVisibility, setPasswordVisibility] = useState({});
 
@@ -69,12 +68,13 @@ const PasswordTable = ({ fetchPasswords, passwords }) => {
                     <tr key={index}>
                         <td className={Styles.website}>
                             <div className={Styles.websiteContainer}>
-                                <img className={Styles.icon} src={logos[password.logo]} alt="" />
+                                {password.logo !== '' && <img className={Styles.icon} src={logos[password.logo]} alt="" />}
                                 <div className={Styles.content}>
                                     <h5>{password.service_name}</h5>
                                     <a href={password.link}>{password.link}</a>
                                 </div>
                             </div>
+
                         </td>
 
                         <td className={Styles.categories}>
@@ -108,12 +108,12 @@ const PasswordTable = ({ fetchPasswords, passwords }) => {
                         <td className={Styles.vuln}>
                             <div className={Styles.vulnContainer}>
                                 <ProgressBar
-                                    percent={perc}
-                                    fillColor={perc > 50 ? "green" : perc < 20 ? "red" : "orange"}
+                                    percent={password.score}
+                                    fillColor={password.score > 50 ? "green" : password.score < 20 ? "red" : "orange"}
                                     width="50px"
                                     height="15px"
                                 />
-                                {perc}%
+                                {password.score}%
                                 <div className={Styles.options}>
                                         <span
                                             onClick={() => handleDropdownToggle(index)}
