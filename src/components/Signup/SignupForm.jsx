@@ -27,6 +27,7 @@ const LoginForm = () => {
         fetch("http://localhost:8080/auth/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
+            credentials: 'include',
             body: JSON.stringify(data)
         })
             .then(response => {

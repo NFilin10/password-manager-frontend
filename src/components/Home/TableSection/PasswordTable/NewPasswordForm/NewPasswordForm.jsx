@@ -28,6 +28,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
         fetch("http://localhost:8080/add", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
+            credentials: 'include',
             body: JSON.stringify(data)
         })
             .then(response => response.json())

@@ -6,7 +6,7 @@ const Category = ({categoryName}) => {
     return (
         <div className={Styles.categoryWrapper}>
             <div className={Styles.categoryName}>
-                <h6>{ categoryName.name }</h6>
+                <h6>{ categoryName.category_name }</h6>
             </div>
             <span>{ categoryName.amount }</span>
         </div>

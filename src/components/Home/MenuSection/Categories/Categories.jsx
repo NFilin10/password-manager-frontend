@@ -1,28 +1,11 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Styles from './Categories.module.css';
 import Category from './Category/Category';
 
 const Categories = () => {
     const [showInput, setShowInput] = useState(false);
     const [newCategoryName, setNewCategoryName] = useState('');
-    const [categories, setCategories] = useState([
-        {
-            name: 'Design',
-            amount: 12
-        },
-        {
-            name: 'Art',
-            amount: 63
-        },
-        {
-            name: 'School',
-            amount: 6
-        },
-        {
-            name: 'Uni',
-            amount: 60
-        },
-    ]);
+    const [categories, setCategories] = useState([]);
 
     const handleToggleInput = () => {
         setShowInput(!showInput);
@@ -32,17 +15,48 @@ const Categories = () => {
         setNewCategoryName(e.target.value);
     };
 
-    const handleAddCategory = () => {
-        if (newCategoryName.trim() !== '') {
-            const newCategory = {
-                name: newCategoryName,
-                amount: 0 // Assuming newly added category has 0 amount initially
-            };
-            setCategories([...categories, newCategory]);
-            setNewCategoryName('');
-            setShowInput(false);
-        }
-    };
+    useEffect(() => {
+        getCategories();
+
+    }, []);
+
+
+    const getCategories = () => {
+        fetch(`http://localhost:8080/categories`, {
+            credentials: 'include'
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+                setCategories(data);
+            })
+            .catch(error => console.error('Error fetching passwords:', error));
+    }
+
+
+    const addCategory = () => {
+
+        const data = {category: newCategoryName}
+
+        fetch("http://localhost:8080/new-category", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", },
+            credentials: 'include',
+
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(newPassword => {
+                console.log("DONE")
+                setShowInput(false);
+
+            })
+            .catch(e => {
+                console.log(e);
+                console.log("error");
+            });
+    }
+
 
     let categoryEl = categories.map((category, index) => (
         <Category categoryName={category} key={index} />
@@ -61,7 +75,7 @@ const Categories = () => {
                                 onChange={handleInputChange}
                                 placeholder="New category name"
                             />
-                            <button onClick={handleAddCategory}>Add</button>
+                            <button onClick={addCategory}>Add</button>
                         </div>
                     ) : (
                         <span onClick={handleToggleInput}>+</span>
