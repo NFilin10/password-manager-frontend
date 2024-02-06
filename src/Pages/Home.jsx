@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import MenuSection from "../components/Home/MenuSection/MenuSection";
 import TableSection from "../components/Home/TableSection/TableSection";
+import Styles from './Home.module.css'
 
 function Home() {
     const [showMenu, setShowMenu] = useState(false);
@@ -17,7 +18,7 @@ function Home() {
     };
 
     return (
-        <div className="homeWrapper">
+        <div className={Styles.homeWrapper}>
             <MenuSection showMenu={showMenu} setShowMenu={setShowMenu} fetchPasswords={fetchPasswords}/>
             <TableSection showMenu={showMenu} fetchPasswords={fetchPasswords} passwords={passwords}/> {/* Pass passwords as a prop */}
         </div>

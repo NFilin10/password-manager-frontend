@@ -3,12 +3,21 @@ import ProfileLogo from "../../../../assets/profileLogo.png";
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState, useEffect } from "react";
+import {useNavigate} from "react-router-dom";
 
 const Profile = () => {
     const [open, setOpen] = useState(false);
 
     const menuRef = useRef();
     const imgRef = useRef();
+
+
+    let navigate = useNavigate();
+
+    const routeChange = () =>{
+        let path = `/login`;
+        navigate(path);
+    }
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -28,6 +37,20 @@ const Profile = () => {
         };
     }, []);
 
+    const logout = async (e) => {
+            fetch("http://localhost:8080/auth/logout", {
+                credentials: 'include',
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    routeChange()
+                })
+                .catch((e) => {
+                    console.log("error logout");
+                });
+    }
+
+
     return (
         <div className={Styles.profileWrapper}>
             <div className={Styles.logoWrapper}>
@@ -41,7 +64,7 @@ const Profile = () => {
                     </span>
                     {open && (
                         <div ref={menuRef} className={Styles.dropdown}>
-                            <li>Log out</li>
+                            <li><button onClick={logout}>Log out</button></li>
                             <li>Change password</li>
                         </div>
                     )}
