@@ -4,6 +4,8 @@ import Home from './Pages/Home';
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import auth from './auth';
+import './App.css';
+
 
 function App() {
     const navigate = useNavigate();
