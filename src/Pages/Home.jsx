@@ -9,7 +9,9 @@ function Home() {
     const [passwords, setPasswords] = useState([]);
 
     const fetchPasswords = () => {
-        fetch(`http://localhost:8080/`)
+        fetch(`http://localhost:8080/`,{
+            credentials: "include"
+        })
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)

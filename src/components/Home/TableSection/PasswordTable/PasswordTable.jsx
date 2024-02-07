@@ -95,7 +95,7 @@ const PasswordTable = ({ fetchPasswords, passwords }) => {
 
                         <td className={Styles.password}>
                             <div className={Styles.passwordWrapper}>
-                                <p>{passwordVisibility[index] ? password.password : '*'.repeat(password.password.length)}</p>
+                                <p>{passwordVisibility[index] ? password.decryptedPass : '*'.repeat(password.decryptedPass.length)}</p>
                                 <FontAwesomeIcon
                                     icon={passwordVisibility[index] ? faEyeSlash : faEye}
                                     className={Styles.helper}
