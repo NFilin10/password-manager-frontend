@@ -4,14 +4,16 @@ import img from '../../../../../assets/instagramLogo.webp';
 import Styles from './NewPasswordForm.module.css';
 import formImg from '../../../../../assets/form.jpeg';
 
-const NewPasswordForm = ({ onClose, fetchPasswords }) => {
-    const [website, setWebsite] = useState('');
-    const [link, setLink] = useState('');
-    const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
+const NewPasswordForm = ({ onClose, fetchPasswords, passwordData }) => {
+    console.log("passwordData", passwordData)
+    const [link, setLink] = useState(passwordData ? passwordData.link || '' : '');
+    const [website, setWebsite] = useState(passwordData ? passwordData.website || '' : '');
+    const [login, setLogin] = useState(passwordData ? passwordData.login || '' : '');
+    const [password, setPassword] = useState(passwordData ? passwordData.decryptedPass || '' : '');
     const [categories, setCategories] = useState([]);
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [logo, setLogo] = useState('');
+    const [selectedCategories, setSelectedCategories] = useState(passwordData ? passwordData.categories || [] : []);
+    const [logo, setLogo] = useState(passwordData ? passwordData.logo || '' : '');
+
 
     useEffect(() => {
         getCategories();
@@ -76,6 +78,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
                                         placeholder={"Website"}
                                         type="text"
                                         value={website}
+                                        required={true}
                                         onChange={(e) => setWebsite(e.target.value)}
                                     />
                                 </div>
@@ -104,6 +107,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
                                     <input
                                         className={Styles.formInput}
                                         placeholder={"Password"}
+                                        required={true}
                                         type="password"
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
