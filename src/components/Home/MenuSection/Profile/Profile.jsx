@@ -38,7 +38,7 @@ const Profile = () => {
     }, []);
 
     const logout = async (e) => {
-            fetch("http://localhost:8080/auth/logout", {
+            fetch("https://password-manager-ca92.onrender.com/auth/logout", {
                 credentials: 'include',
             })
                 .then((response) => response.json())
