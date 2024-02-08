@@ -11,7 +11,7 @@ import facebookIcon from "../../../../assets/facebook.png"
 import NewPasswordForm from "./NewPasswordForm/NewPasswordForm";
 
 
-const PasswordTable = ({ fetchPasswords, passwords }) => {
+const PasswordTable = ({ fetchPasswords, passwords, getCategories }) => {
     const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
     const [passwordVisibility, setPasswordVisibility] = useState({});
 
@@ -35,6 +35,7 @@ const PasswordTable = ({ fetchPasswords, passwords }) => {
             .then((data) => {
                 console.log(data)
                 fetchPasswords()
+                getCategories()
             })
             .catch(error => console.error('Error deleting password:', error));
     };
@@ -84,9 +85,11 @@ const PasswordTable = ({ fetchPasswords, passwords }) => {
                 <NewPasswordForm
                     onClose={() => setSelectedPassword(null)} // Close the form
                     fetchPasswords={fetchPasswords}
-                    passwordData={selectedPassword} // Pass selected password data
+                    passwordData={selectedPassword}
+                    getCategories={getCategories} // Pass getCategories as a prop
                 />
             )}
+
 
 
             <div className={Styles.passwordTableWrapper}>

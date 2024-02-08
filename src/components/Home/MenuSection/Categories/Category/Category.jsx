@@ -8,7 +8,7 @@ const Category = ({categoryName}) => {
             <div className={Styles.categoryName}>
                 <h6>{ categoryName.category_name }</h6>
             </div>
-            <span>{ categoryName.amount }</span>
+            <span>{ categoryName.password_count }</span>
         </div>
     )
 }

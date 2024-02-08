@@ -4,7 +4,7 @@ import img from '../../../../../assets/instagramLogo.webp';
 import Styles from './NewPasswordForm.module.css';
 import formImg from '../../../../../assets/form.jpeg';
 
-const NewPasswordForm = ({ onClose, fetchPasswords, passwordData }) => {
+const NewPasswordForm = ({ onClose, fetchPasswords, passwordData, getCategories }) => {
     console.log("passwordData", passwordData)
     const [link, setLink] = useState(passwordData ? passwordData.link || '' : '');
     const [website, setWebsite] = useState(passwordData ? passwordData.website || '' : '');
@@ -16,10 +16,10 @@ const NewPasswordForm = ({ onClose, fetchPasswords, passwordData }) => {
 
 
     useEffect(() => {
-        getCategories();
+        getCategories1();
     }, []);
 
-    const getCategories = () => {
+    const getCategories1 = () => {
         fetch(`http://localhost:8080/categories`, {
             credentials: 'include'
         })
@@ -33,6 +33,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords, passwordData }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
 
         const data = {
             website: website,
@@ -52,6 +53,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords, passwordData }) => {
             .then(response => response.json())
             .then(newPassword => {
                 onClose(); // Close the form
+                getCategories();
                 fetchPasswords();
             })
             .catch(e => {

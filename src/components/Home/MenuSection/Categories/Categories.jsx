@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import Styles from './Categories.module.css';
 import Category from './Category/Category';
 
-const Categories = () => {
+const Categories = ({ getCategories, categories }) => {
     const [showInput, setShowInput] = useState(false);
     const [newCategoryName, setNewCategoryName] = useState('');
-    const [categories, setCategories] = useState([]);
+    // const [categories, setCategories] = useState([]);
 
     const handleToggleInput = () => {
         setShowInput(!showInput);
@@ -21,17 +21,17 @@ const Categories = () => {
     }, []);
 
 
-    const getCategories = () => {
-        fetch(`http://localhost:8080/categories`, {
-            credentials: 'include'
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                setCategories(data);
-            })
-            .catch(error => console.error('Error fetching passwords:', error));
-    }
+    // const getCategories = () => {
+    //     fetch(`http://localhost:8080/categories`, {
+    //         credentials: 'include'
+    //     })
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             console.log("CAT DATA", data)
+    //             setCategories(data);
+    //         })
+    //         .catch(error => console.error('Error fetching passwords:', error));
+    // }
 
 
     const addCategory = () => {
