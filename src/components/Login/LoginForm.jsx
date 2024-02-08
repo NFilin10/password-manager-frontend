@@ -29,7 +29,7 @@ const LoginForm = () => {
 
         e.preventDefault();
 
-        fetch("http://localhost:8080/auth/login", {
+        fetch("https://password-manager-ca92.onrender.com/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
             credentials: 'include',

@@ -38,7 +38,7 @@ const Categories = ({ getCategories, categories }) => {
 
         const data = {category: newCategoryName}
 
-        fetch("http://localhost:8080/new-category", {
+        fetch("https://password-manager-ca92.onrender.com/new-category", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
             credentials: 'include',
@@ -49,6 +49,7 @@ const Categories = ({ getCategories, categories }) => {
             .then(newPassword => {
                 console.log("DONE")
                 setShowInput(false);
+                getCategories()
 
             })
             .catch(e => {

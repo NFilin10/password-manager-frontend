@@ -11,7 +11,7 @@ function Home() {
 
 
     const fetchPasswords = () => {
-        fetch(`http://localhost:8080/`,{
+        fetch(`https://password-manager-ca92.onrender.com`,{
             credentials: "include"
         })
             .then((res) => res.json())
@@ -25,7 +25,7 @@ function Home() {
 
     const getCategories = () => {
         console.log("FETCHING")
-        fetch(`http://localhost:8080/categories`, {
+        fetch(`https://password-manager-ca92.onrender.com/categories`, {
             credentials: 'include'
         })
             .then((res) => res.json())

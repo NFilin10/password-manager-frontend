@@ -26,7 +26,7 @@ const PasswordTable = ({ fetchPasswords, passwords, getCategories }) => {
 
 
     const deletePassword = (id) => {
-        fetch(`http://localhost:8080/delete/${id}`,{
+        fetch(`https://password-manager-ca92.onrender.com/delete/${id}`,{
             credentials: "include",
             method: "DELETE",
             headers: {"Content-Type": "application/json"}

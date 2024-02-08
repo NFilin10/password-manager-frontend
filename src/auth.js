@@ -3,7 +3,7 @@ const auth = {
     user: { authenticated: false },
     authenticated: async function() {
         try {
-            const response = await fetch("http://localhost:8080/auth/authenticate", {
+            const response = await fetch("https://password-manager-ca92.onrender.com/auth/authenticate", {
                 credentials: 'include',
             });
             const data = await response.json();

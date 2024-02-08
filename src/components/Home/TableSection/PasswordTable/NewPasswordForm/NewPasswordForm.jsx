@@ -4,7 +4,7 @@ import img from '../../../../../assets/instagramLogo.webp';
 import Styles from './NewPasswordForm.module.css';
 import formImg from '../../../../../assets/form.jpeg';
 
-const NewPasswordForm = ({ onClose, fetchPasswords }) => {
+const NewPasswordForm = ({ onClose, fetchPasswords, getCategories }) => {
     const [website, setWebsite] = useState('');
     const [link, setLink] = useState('');
     const [login, setLogin] = useState('');
@@ -14,11 +14,11 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
     const [logo, setLogo] = useState('');
 
     useEffect(() => {
-        getCategories();
+        getCategories1();
     }, []);
 
-    const getCategories = () => {
-        fetch(`http://localhost:8080/categories`, {
+    const getCategories1 = () => {
+        fetch(`https://password-manager-ca92.onrender.com/categories`, {
             credentials: 'include'
         })
             .then((res) => res.json())
@@ -41,7 +41,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
             categories: selectedCategories
         };
 
-        fetch("http://localhost:8080/add", {
+        fetch("https://password-manager-ca92.onrender.com/add", {
             method: "POST",
             headers: { "Content-Type": "application/json", },
             credentials: 'include',
@@ -51,6 +51,8 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
             .then(newPassword => {
                 onClose(); // Close the form
                 fetchPasswords();
+                getCategories();
+
             })
             .catch(e => {
                 console.log(e);

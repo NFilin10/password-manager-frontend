@@ -33,7 +33,7 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
     }, []);
 
     const getCategories = () => {
-        fetch(`http://localhost:8080/categories`, {
+        fetch(`https://password-manager-ca92.onrender.com/categories`, {
             credentials: 'include'
         })
             .then((res) => res.json())
@@ -57,7 +57,7 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
             categories: selectedCategories
         };
 
-        fetch(`http://localhost:8080/update/${passID}`, {
+        fetch(`https://password-manager-ca92.onrender.com/update/${passID}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json", },
             credentials: 'include',
