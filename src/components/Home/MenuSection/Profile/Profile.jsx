@@ -64,8 +64,7 @@ const Profile = () => {
                     </span>
                     {open && (
                         <div ref={menuRef} className={Styles.dropdown}>
-                            <li><button onClick={logout}>Log out</button></li>
-                            <li>Change password</li>
+                            <li onClick={logout}>Logout</li>
                         </div>
                     )}
                 </div>
