@@ -1,17 +1,32 @@
 // PasswordUpdateForm.js
 import React, { useEffect, useState } from 'react';
 import img from '../../../../../assets/instagramLogo.webp';
-import Styles from './NewPasswordForm.module.css';
+import Styles from './PasswordUpdateForm.module.css';
 import formImg from '../../../../../assets/form.jpeg';
 
-const NewPasswordForm = ({ onClose, fetchPasswords }) => {
-    const [website, setWebsite] = useState('');
-    const [link, setLink] = useState('');
-    const [login, setLogin] = useState('');
-    const [password, setPassword] = useState('');
+const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
+    console.log("PASSD", passwordData)
+    const [website, setWebsite] = useState(passwordData.service_name);
+    const [link, setLink] = useState(passwordData.link);
+    const [login, setLogin] = useState(passwordData.login);
+    const [password, setPassword] = useState(passwordData.decryptedPass);
     const [categories, setCategories] = useState([]);
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    const [logo, setLogo] = useState('');
+    const [selectedCategories, setSelectedCategories] = useState(passwordData.categories);
+    const [logo, setLogo] = useState(passwordData.logo);
+
+    const firstLetter = logo.charAt(0)
+
+    const firstLetterCap = firstLetter.toUpperCase()
+
+    const remainingLetters = logo.slice(1)
+
+    const capitalizedWord = firstLetterCap + remainingLetters
+
+    const selectedCats = []
+
+    selectedCategories.map((cat) => {
+        selectedCats.push(cat.category_name)
+    })
 
     useEffect(() => {
         getCategories();
@@ -31,6 +46,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const passID = passwordData.id
 
         const data = {
             website: website,
@@ -41,8 +57,8 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
             categories: selectedCategories
         };
 
-        fetch("http://localhost:8080/add", {
-            method: "POST",
+        fetch(`http://localhost:8080/update/${passID}`, {
+            method: "PUT",
             headers: { "Content-Type": "application/json", },
             credentials: 'include',
             body: JSON.stringify(data)
@@ -66,7 +82,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
                     <img src={formImg} alt="" />
                 </div>
                 <div className={Styles.formContainer}>
-                    <h1>Add new password</h1>
+                    <h1>Update password</h1>
                     <form onSubmit={handleSubmit}>
                         <div className={Styles.form}>
                             <div className={Styles.upper}>
@@ -114,7 +130,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
                             <div className={Styles.bottom}>
                                 <div>
                                     <select
-                                        value={logo}
+                                        value={capitalizedWord}
                                         onChange={(e) => setLogo(e.target.value)}
                                     >
                                         <option value="">Select logo</option>
@@ -126,8 +142,8 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
 
                                 <div>
                                     <select
-                                        multiple
-                                        value={selectedCategories}
+                                        multiple={true}
+                                        value={selectedCats}
                                         onChange={(e) => setSelectedCategories(Array.from(e.target.selectedOptions, option => option.value))}
                                     >
                                         <option value="">Select categories</option>
@@ -137,7 +153,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
                             </div>
                         </div>
                         <div className={Styles.buttonWrapper}>
-                            <button className={Styles.submitBtn} type="submit">Add Password</button>
+                            <button className={Styles.submitBtn} type="submit">Update</button>
                         </div>
                     </form>
                 </div>
@@ -146,4 +162,4 @@ const NewPasswordForm = ({ onClose, fetchPasswords }) => {
     );
 };
 
-export default NewPasswordForm;
+export default PasswordUpdateForm;

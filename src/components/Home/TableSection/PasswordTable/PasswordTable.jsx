@@ -8,7 +8,7 @@ import InstagramLogo from '../../../../assets/instagramLogo.webp';
 import Category from "../../MenuSection/Categories/Category/Category";
 import { useEffect, useRef } from "react";
 import facebookIcon from "../../../../assets/facebook.png"
-import NewPasswordForm from "./NewPasswordForm/NewPasswordForm";
+import PasswordUpdateForm from "./PasswordUpdateForm/PasswordUpdateForm";
 
 
 const PasswordTable = ({ fetchPasswords, passwords, getCategories }) => {
@@ -82,7 +82,7 @@ const PasswordTable = ({ fetchPasswords, passwords, getCategories }) => {
 
         <>
             {selectedPassword && (
-                <NewPasswordForm
+                <PasswordUpdateForm
                     onClose={() => setSelectedPassword(null)} // Close the form
                     fetchPasswords={fetchPasswords}
                     passwordData={selectedPassword}
