@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react';
 import img from '../../../../../assets/instagramLogo.webp';
 import Styles from './NewPasswordForm.module.css';
 import formImg from '../../../../../assets/form.jpeg';
+import {useCategoriesStore, usePasswordsStore} from "../../../../../store";
 
-const NewPasswordForm = ({ onClose, fetchPasswords, getCategories }) => {
+
+const NewPasswordForm = ({ onClose }) => {
     const [website, setWebsite] = useState('');
     const [link, setLink] = useState('');
     const [login, setLogin] = useState('');
@@ -12,6 +14,12 @@ const NewPasswordForm = ({ onClose, fetchPasswords, getCategories }) => {
     const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [logo, setLogo] = useState('');
+
+    const fetchPasswords = usePasswordsStore(state => state.fetchPasswords)
+
+    const fetchCategories = useCategoriesStore(state => state.fetchCategories)
+
+
 
     useEffect(() => {
         getCategories1();
@@ -51,7 +59,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords, getCategories }) => {
             .then(newPassword => {
                 onClose(); // Close the form
                 fetchPasswords();
-                getCategories();
+                fetchCategories();
 
             })
             .catch(e => {

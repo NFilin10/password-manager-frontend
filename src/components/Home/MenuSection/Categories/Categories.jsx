@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import Styles from './Categories.module.css';
 import Category from './Category/Category';
+import {useCategoriesStore} from "../../../../store";
 
-const Categories = ({ getCategories, categories }) => {
+const Categories = () => {
     const [showInput, setShowInput] = useState(false);
     const [newCategoryName, setNewCategoryName] = useState('');
-    // const [categories, setCategories] = useState([]);
+
+    const categories = useCategoriesStore(state => state.categories)
+
+    const fetchCategories = useCategoriesStore(state => state.fetchCategories)
 
     const handleToggleInput = () => {
         setShowInput(!showInput);
@@ -16,7 +20,7 @@ const Categories = ({ getCategories, categories }) => {
     };
 
     useEffect(() => {
-        getCategories();
+        fetchCategories();
 
     }, []);
 
@@ -49,7 +53,7 @@ const Categories = ({ getCategories, categories }) => {
             .then(newPassword => {
                 console.log("DONE")
                 setShowInput(false);
-                getCategories()
+                fetchCategories()
 
             })
             .catch(e => {

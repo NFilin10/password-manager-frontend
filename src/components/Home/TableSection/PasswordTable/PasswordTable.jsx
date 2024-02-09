@@ -9,13 +9,20 @@ import Category from "../../MenuSection/Categories/Category/Category";
 import { useEffect, useRef } from "react";
 import facebookIcon from "../../../../assets/facebook.png"
 import PasswordUpdateForm from "./PasswordUpdateForm/PasswordUpdateForm";
+import { usePasswordsStore, useCategoriesStore } from "../../../../store"; // import as named import
 
 
-const PasswordTable = ({ fetchPasswords, passwords, getCategories }) => {
+
+const PasswordTable = () => {
     const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
     const [passwordVisibility, setPasswordVisibility] = useState({});
 
     const [selectedPassword, setSelectedPassword] = useState(null); // Add selectedPassword state
+
+    const passwords = usePasswordsStore(state => state.passwords)
+    const fetchPasswords = usePasswordsStore(state => state.fetchPasswords)
+
+    const fetchCategories = useCategoriesStore(state => state.fetchCategories)
 
 
     const handleEditPassword = (index) => {
@@ -35,7 +42,7 @@ const PasswordTable = ({ fetchPasswords, passwords, getCategories }) => {
             .then((data) => {
                 console.log(data)
                 fetchPasswords()
-                getCategories()
+                fetchCategories()
             })
             .catch(error => console.error('Error deleting password:', error));
     };
@@ -47,6 +54,7 @@ const PasswordTable = ({ fetchPasswords, passwords, getCategories }) => {
         fetchPasswords();
 
     }, []);
+
 
     const togglePasswordVisibility = (index) => {
         setPasswordVisibility(prevVisibility => ({
