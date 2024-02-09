@@ -79,7 +79,7 @@ const Categories = ({ getCategories, categories }) => {
                             <button onClick={addCategory}>Add</button>
                         </div>
                     ) : (
-                        <span onClick={handleToggleInput}>+</span>
+                        <span className={Styles.addNewCategory} onClick={handleToggleInput}>+</span>
                     )}
                 </div>
             </div>

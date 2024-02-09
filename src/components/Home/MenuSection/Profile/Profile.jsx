@@ -60,7 +60,7 @@ const Profile = () => {
                 <h4>Name Surname</h4>
                 <div className={Styles.options}>
                     <span ref={imgRef} onClick={() => setOpen(!open)} className={Styles.more}>
-                        <FontAwesomeIcon icon={faEllipsisVertical} />
+                        <FontAwesomeIcon className={Styles.moreButton} icon={faEllipsisVertical} />
                     </span>
                     {open && (
                         <div ref={menuRef} className={Styles.dropdown}>

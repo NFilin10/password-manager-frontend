@@ -116,6 +116,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords, getCategories }) => {
                             <div className={Styles.bottom}>
                                 <div>
                                     <select
+                                        className={Styles.selectLogo}
                                         value={logo}
                                         onChange={(e) => setLogo(e.target.value)}
                                     >
@@ -128,6 +129,7 @@ const NewPasswordForm = ({ onClose, fetchPasswords, getCategories }) => {
 
                                 <div>
                                     <select
+                                        className={Styles.selectCat}
                                         multiple
                                         value={selectedCategories}
                                         onChange={(e) => setSelectedCategories(Array.from(e.target.selectedOptions, option => option.value))}

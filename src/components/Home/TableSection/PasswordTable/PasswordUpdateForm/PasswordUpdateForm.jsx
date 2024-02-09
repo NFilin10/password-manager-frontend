@@ -130,6 +130,8 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
                             <div className={Styles.bottom}>
                                 <div>
                                     <select
+                                        className={Styles.selectLogo}
+
                                         value={capitalizedWord}
                                         onChange={(e) => setLogo(e.target.value)}
                                     >
@@ -142,6 +144,7 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
 
                                 <div>
                                     <select
+                                        className={Styles.selectCat}
                                         multiple={true}
                                         value={selectedCats}
                                         onChange={(e) => setSelectedCategories(Array.from(e.target.selectedOptions, option => option.value))}

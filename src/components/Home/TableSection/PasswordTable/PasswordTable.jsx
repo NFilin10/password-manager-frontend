@@ -159,7 +159,7 @@ const PasswordTable = ({ fetchPasswords, passwords, getCategories }) => {
                                             onClick={() => handleDropdownToggle(index)}
                                             className={Styles.more}
                                         >
-                                            <FontAwesomeIcon icon={faEllipsisVertical} />
+                                            <FontAwesomeIcon className={Styles.moreButton} icon={faEllipsisVertical} />
                                         </span>
                                         {openDropdownIndex === index && (
                                             <div ref={menuRef} className={Styles.dropdown}>
