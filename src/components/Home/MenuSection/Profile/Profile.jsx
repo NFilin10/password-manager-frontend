@@ -11,6 +11,14 @@ const Profile = ({ setIsAuthenticated }) => {
     const menuRef = useRef();
     const imgRef = useRef();
 
+    const [name, setName] = useState('')
+    const [surname, setSurname] = useState('')
+
+
+    useEffect(() => {
+        getUser();
+
+    }, []);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -44,13 +52,28 @@ const Profile = ({ setIsAuthenticated }) => {
     }
 
 
+    const getUser = async () => {
+        fetch("https://password-manager-ca92.onrender.com/user", {
+            credentials: 'include',
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setName(data[0].name)
+                setSurname(data[0].surname)
+            })
+            .catch((e) => {
+                console.log("error fetching user", e);
+            });
+    }
+
+
     return (
         <div className={Styles.profileWrapper}>
             <div className={Styles.logoWrapper}>
                 <img src={ProfileLogo} alt="" />
             </div>
             <div className={Styles.content}>
-                <h4>Name Surname</h4>
+                <h4>{name} {surname}</h4>
                 <div className={Styles.options}>
                     <span ref={imgRef} onClick={() => setOpen(!open)} className={Styles.more}>
                         <FontAwesomeIcon className={Styles.moreButton} icon={faEllipsisVertical} />
