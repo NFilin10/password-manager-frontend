@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -15,7 +15,7 @@ function App() {
                 const isAuthenticated = await auth.authenticated();
                 const currentPath = window.location.pathname;
 
-                if (!isAuthenticated && currentPath !== '/signup') {
+                if (!isAuthenticated && currentPath !== '/login' && currentPath !== '/signup') {
                     // Redirect to login if not authenticated
                     navigate('/login');
                 }
@@ -25,8 +25,8 @@ function App() {
             }
         };
 
-        // checkAuth();
-    }, []);
+        checkAuth();
+    }, [navigate]);
 
     return (
         <div className="App">
