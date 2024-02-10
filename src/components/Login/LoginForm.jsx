@@ -6,7 +6,7 @@ import {useState} from "react";
 
 
 
-const LoginForm = () => {
+const LoginForm = ({ setIsAuthenticated }) => {
 
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
@@ -25,28 +25,32 @@ const LoginForm = () => {
     }
 
     const LoginIn = async (e) => {
-        const data = {email: login, password: password };
+        const data = { email: login, password: password };
 
         e.preventDefault();
 
-        fetch("https://password-manager-ca92.onrender.com/auth/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", },
-            credentials: 'include',
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                if (response.status === 401) {
-                    throw new Error('Incorrect login or password');
-                }
-                routeChange();
-
-            })
-            .catch(e => {
-                console.log(e);
-                console.log("error");
+        try {
+            const response = await fetch("https://password-manager-ca92.onrender.com/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: 'include',
+                body: JSON.stringify(data)
             });
+
+            if (response.status === 401) {
+                throw new Error('Incorrect login or password');
+            }
+
+            setIsAuthenticated(true)
+
+            // Redirect only when login is successful
+            // routeChange();
+        } catch (error) {
+            console.error(error);
+            console.log("error");
+        }
     };
+
 
     return (
 

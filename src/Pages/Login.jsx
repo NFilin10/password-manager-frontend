@@ -1,11 +1,11 @@
 
 import LoginForm from "../components/Login/LoginForm";
 
-function Login() {
+function Login({ setIsAuthenticated, isAuthenticated }) {
 
     return (
         <>
-            <LoginForm/>
+            <LoginForm setIsAuthenticated={setIsAuthenticated}/>
         </>
     );
 }

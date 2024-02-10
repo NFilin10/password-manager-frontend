@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const LoginForm = () => {
+const LoginForm = ({ setIsAuthenticated }) => {
 
     const [login, setLogin] = useState('')
     const [email, setEmail] = useState('')
@@ -31,7 +31,7 @@ const LoginForm = () => {
             body: JSON.stringify(data)
         })
             .then(response => {
-                routeChange();
+                setIsAuthenticated(true)
 
             })
             .catch(e => {

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState, useEffect } from "react";
 import {useNavigate} from "react-router-dom";
 
-const Profile = () => {
+const Profile = ({ setIsAuthenticated }) => {
     const [open, setOpen] = useState(false);
 
     const menuRef = useRef();
@@ -44,7 +44,7 @@ const Profile = () => {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("changing route")
-                    routeChange()
+                    setIsAuthenticated(false)
                 })
                 .catch((e) => {
                     console.log("error logout", e);

@@ -2,11 +2,11 @@
 
 
 import SignupForm from "../components/Signup/SignupForm";
-function Signup() {
+function Signup({ setIsAuthenticated }) {
 
     return (
         <>
-            <SignupForm/>
+            <SignupForm setIsAuthenticated={setIsAuthenticated}/>
         </>
     );
 }

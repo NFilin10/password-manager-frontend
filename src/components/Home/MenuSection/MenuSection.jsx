@@ -5,13 +5,13 @@ import Styles from './MenuSection.module.css'
 
 
 
-const MenuSection = () => {
+const MenuSection = ({ setIsAuthenticated }) => {
     return (
         <div className="menuSectionWrapper">
             <div className={Styles.menuSectionContainer}>
                 <LogoButton />
                 <Categories/>
-                <Profile/>
+                <Profile setIsAuthenticated={setIsAuthenticated}/>
             </div>
         </div>
     )

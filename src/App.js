@@ -27,9 +27,9 @@ function App() {
     return (
         <div className="App">
             <Routes>
-                <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
-                <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/" />} />
-                <Route path="/signup" element={!isAuthenticated ? <Signup /> : <Navigate to="/" />} />
+                <Route path="/" element={isAuthenticated ? <Home setIsAuthenticated={setIsAuthenticated}/> : <Navigate to="/login" />} />
+                <Route path="/login" element={!isAuthenticated ? <Login setIsAuthenticated={setIsAuthenticated}/> : <Navigate to="/" />} />
+                <Route path="/signup" element={!isAuthenticated ? <Signup setIsAuthenticated={setIsAuthenticated}/> : <Navigate to="/" />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </div>
