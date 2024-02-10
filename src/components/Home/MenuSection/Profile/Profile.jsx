@@ -43,10 +43,11 @@ const Profile = () => {
             })
                 .then((response) => response.json())
                 .then((data) => {
+                    console.log("changing route")
                     routeChange()
                 })
                 .catch((e) => {
-                    console.log("error logout");
+                    console.log("error logout", e);
                 });
     }
 
