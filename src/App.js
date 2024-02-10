@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -7,33 +7,29 @@ import auth from './auth';
 import './App.css';
 
 function App() {
-    const navigate = useNavigate();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                const isAuthenticated = await auth.authenticated();
-                const currentPath = window.location.pathname;
-
-                if (!isAuthenticated && currentPath !== '/login' && currentPath !== '/signup') {
-                    // Redirect to login if not authenticated
-                    navigate('/login');
-                }
-            } catch (error) {
-                // Handle authentication error
-                console.error('Authentication error:', error);
-            }
+        const checkAuthentication = async () => {
+            const isAuthenticated = await auth.authenticated();
+            setIsAuthenticated(isAuthenticated);
+            setLoading(false);
         };
 
-        checkAuth();
-    }, [navigate]);
+        checkAuthentication();
+    }, []);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div className="App">
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/login" />} />
+                <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/" />} />
+                <Route path="/signup" element={!isAuthenticated ? <Signup /> : <Navigate to="/" />} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </div>
