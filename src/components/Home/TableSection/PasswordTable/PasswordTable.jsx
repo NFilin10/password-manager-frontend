@@ -94,7 +94,6 @@ const PasswordTable = () => {
                     onClose={() => setSelectedPassword(null)} // Close the form
                     fetchPasswords={fetchPasswords}
                     passwordData={selectedPassword}
-                    getCategories={getCategories} // Pass getCategories as a prop
                 />
             )}
 
