@@ -1,8 +1,8 @@
-// LogoButton.js
 import React, { useState, useEffect } from 'react';
 import Styles from './LogoButton.module.css';
 import AppLogo from '../../../../assets/logo.png';
-import NewPasswordForm from "../../TableSection/PasswordTable/NewPasswordForm/NewPasswordForm";
+import NewPasswordForm from "../../NewPasswordForm/NewPasswordForm";
+
 const LogoButton = () => {
     const [showForm, setShowForm] = useState(false);
 
@@ -13,8 +13,6 @@ const LogoButton = () => {
     const handleCloseForm = () => {
         setShowForm(false);
     };
-
-
 
 
     return (
@@ -36,8 +34,7 @@ const LogoButton = () => {
             </div>
 
             <div className={Styles.modalContent}>
-                {showForm && <NewPasswordForm onClose={handleCloseForm}/>
-                }
+                {showForm && <NewPasswordForm onClose={handleCloseForm}/>}
             </div>
         </div>
     );

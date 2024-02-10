@@ -12,13 +12,6 @@ const Profile = ({ setIsAuthenticated }) => {
     const imgRef = useRef();
 
 
-    let navigate = useNavigate();
-
-    const routeChange = () =>{
-        let path = `/login`;
-        navigate(path);
-    }
-
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (
@@ -37,13 +30,12 @@ const Profile = ({ setIsAuthenticated }) => {
         };
     }, []);
 
-    const logout = async (e) => {
+    const logout = async () => {
             fetch("https://password-manager-ca92.onrender.com/auth/logout", {
                 credentials: 'include',
             })
                 .then((response) => response.json())
-                .then((data) => {
-                    console.log("changing route")
+                .then(() => {
                     setIsAuthenticated(false)
                 })
                 .catch((e) => {

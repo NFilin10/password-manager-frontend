@@ -8,21 +8,44 @@ import InstagramLogo from '../../../../assets/instagramLogo.webp';
 import Category from "../../MenuSection/Categories/Category/Category";
 import { useEffect, useRef } from "react";
 import facebookIcon from "../../../../assets/facebook.png"
-import PasswordUpdateForm from "./PasswordUpdateForm/PasswordUpdateForm";
-import { usePasswordsStore, useCategoriesStore } from "../../../../store"; // import as named import
-
+import PasswordUpdateForm from "../../PasswordUpdateForm/PasswordUpdateForm";
+import { usePasswordsStore, useCategoriesStore } from "../../../../store";
 
 
 const PasswordTable = () => {
+
+    const logos = {"facebook" : facebookIcon, "instagram" : InstagramLogo}
+
     const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
     const [passwordVisibility, setPasswordVisibility] = useState({});
 
-    const [selectedPassword, setSelectedPassword] = useState(null); // Add selectedPassword state
+    const [selectedPassword, setSelectedPassword] = useState(null);
 
     const passwords = usePasswordsStore(state => state.passwords)
     const fetchPasswords = usePasswordsStore(state => state.fetchPasswords)
 
     const fetchCategories = useCategoriesStore(state => state.fetchCategories)
+
+
+    useEffect(() => {
+        fetchPasswords();
+
+    }, []);
+
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setOpenDropdownIndex(null);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
 
 
     const handleEditPassword = (index) => {
@@ -48,13 +71,6 @@ const PasswordTable = () => {
     };
 
 
-    const logos = {"facebook" : facebookIcon, "instagram" : InstagramLogo}
-
-    useEffect(() => {
-        fetchPasswords();
-
-    }, []);
-
 
     const togglePasswordVisibility = (index) => {
         setPasswordVisibility(prevVisibility => ({
@@ -65,18 +81,6 @@ const PasswordTable = () => {
 
     const menuRef = useRef();
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setOpenDropdownIndex(null);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
 
     const handleDropdownToggle = (index) => {
         setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -91,13 +95,11 @@ const PasswordTable = () => {
         <>
             {selectedPassword && (
                 <PasswordUpdateForm
-                    onClose={() => setSelectedPassword(null)} // Close the form
+                    onClose={() => setSelectedPassword(null)}
                     fetchPasswords={fetchPasswords}
                     passwordData={selectedPassword}
                 />
             )}
-
-
 
             <div className={Styles.passwordTableWrapper}>
                 <table>

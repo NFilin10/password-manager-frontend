@@ -8,21 +8,16 @@ import './App.css';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    // const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const checkAuthentication = async () => {
             const isAuthenticated = await auth.authenticated();
             setIsAuthenticated(isAuthenticated);
-            // setLoading(false);
         };
 
         checkAuthentication();
     }, []);
 
-    // if (loading) {
-    //     return <div>Loading...</div>;
-    // }
 
     return (
         <div className="App">

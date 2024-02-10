@@ -1,36 +1,24 @@
 // PasswordUpdateForm.js
 import React, { useEffect, useState } from 'react';
-import img from '../../../../../assets/instagramLogo.webp';
-import Styles from './PasswordUpdateForm.module.css';
-import formImg from '../../../../../assets/form.jpeg';
-import {useCategoriesStore} from "../../../../../store";
+import img from '../../../assets/instagramLogo.webp';
+import Styles from './NewPasswordForm.module.css';
+import formImg from '../../../assets/form.jpeg';
+import {useCategoriesStore, usePasswordsStore} from "../../../store";
 
-const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
-    console.log("PASSD", passwordData)
-    const [website, setWebsite] = useState(passwordData.service_name);
-    const [link, setLink] = useState(passwordData.link);
-    const [login, setLogin] = useState(passwordData.login);
-    const [password, setPassword] = useState(passwordData.decryptedPass);
-    const [selectedCategories, setSelectedCategories] = useState(passwordData.categories);
-    const [logo, setLogo] = useState(passwordData.logo);
 
-    const categories = useCategoriesStore(state => state.categories)
+const NewPasswordForm = ({ onClose }) => {
+    const [website, setWebsite] = useState('');
+    const [link, setLink] = useState('');
+    const [login, setLogin] = useState('');
+    const [password, setPassword] = useState('');
+    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [logo, setLogo] = useState('');
+
+    const categories =  useCategoriesStore(state => state.categories)
+    const fetchPasswords = usePasswordsStore(state => state.fetchPasswords)
+
     const fetchCategories = useCategoriesStore(state => state.fetchCategories)
 
-
-    const firstLetter = logo.charAt(0)
-
-    const firstLetterCap = firstLetter.toUpperCase()
-
-    const remainingLetters = logo.slice(1)
-
-    const capitalizedWord = firstLetterCap + remainingLetters
-
-    const selectedCats = []
-
-    selectedCategories.map((cat) => {
-        selectedCats.push(cat.category_name)
-    })
 
     useEffect(() => {
         fetchCategories();
@@ -40,7 +28,6 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const passID = passwordData.id
 
         const data = {
             website: website,
@@ -51,32 +38,33 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
             categories: selectedCategories
         };
 
-        fetch(`https://password-manager-ca92.onrender.com/update/${passID}`, {
-            method: "PUT",
+        fetch("https://password-manager-ca92.onrender.com/add", {
+            method: "POST",
             headers: { "Content-Type": "application/json", },
             credentials: 'include',
             body: JSON.stringify(data)
         })
             .then(response => response.json())
-            .then(newPassword => {
-                onClose(); // Close the form
+            .then(() => {
+                onClose();
                 fetchPasswords();
+                fetchCategories();
+
             })
             .catch(e => {
                 console.log(e);
-                console.log("error");
             });
     };
 
     return (
         <>
             <div className={Styles.formWrapper}>
-                <button className={Styles.closeButton} onClick={onClose}>Close</button> {/* Close button */}
+                <button className={Styles.closeButton} onClick={onClose}>Close</button>
                 <div className={Styles.formImg}>
                     <img src={formImg} alt="" />
                 </div>
                 <div className={Styles.formContainer}>
-                    <h1>Update password</h1>
+                    <h1>Add new password</h1>
                     <form onSubmit={handleSubmit}>
                         <div className={Styles.form}>
                             <div className={Styles.upper}>
@@ -125,8 +113,7 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
                                 <div>
                                     <select
                                         className={Styles.selectLogo}
-
-                                        value={capitalizedWord}
+                                        value={logo}
                                         onChange={(e) => setLogo(e.target.value)}
                                     >
                                         <option value="">Select logo</option>
@@ -139,8 +126,8 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
                                 <div>
                                     <select
                                         className={Styles.selectCat}
-                                        multiple={true}
-                                        value={selectedCats}
+                                        multiple
+                                        value={selectedCategories}
                                         onChange={(e) => setSelectedCategories(Array.from(e.target.selectedOptions, option => option.value))}
                                     >
                                         <option value="">Select categories</option>
@@ -150,7 +137,7 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
                             </div>
                         </div>
                         <div className={Styles.buttonWrapper}>
-                            <button className={Styles.submitBtn} type="submit">Update</button>
+                            <button className={Styles.submitBtn} type="submit">Add Password</button>
                         </div>
                     </form>
                 </div>
@@ -159,4 +146,4 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
     );
 };
 
-export default PasswordUpdateForm;
+export default NewPasswordForm;
