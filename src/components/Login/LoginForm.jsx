@@ -25,7 +25,7 @@ const LoginForm = () => {
     }
 
     const LoginIn = async (e) => {
-        var data = {email: login, password: password };
+        const data = {email: login, password: password };
 
         e.preventDefault();
 

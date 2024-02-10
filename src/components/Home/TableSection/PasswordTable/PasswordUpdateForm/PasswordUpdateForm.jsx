@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import img from '../../../../../assets/instagramLogo.webp';
 import Styles from './PasswordUpdateForm.module.css';
 import formImg from '../../../../../assets/form.jpeg';
+import {useCategoriesStore} from "../../../../../store";
 
 const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
     console.log("PASSD", passwordData)
@@ -10,9 +11,12 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
     const [link, setLink] = useState(passwordData.link);
     const [login, setLogin] = useState(passwordData.login);
     const [password, setPassword] = useState(passwordData.decryptedPass);
-    const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState(passwordData.categories);
     const [logo, setLogo] = useState(passwordData.logo);
+
+    const categories = useCategoriesStore(state => state.categories)
+    const fetchCategories = useCategoriesStore(state => state.fetchCategories)
+
 
     const firstLetter = logo.charAt(0)
 
@@ -29,20 +33,10 @@ const PasswordUpdateForm = ({ onClose, fetchPasswords, passwordData }) => {
     })
 
     useEffect(() => {
-        getCategories();
+        fetchCategories();
     }, []);
 
-    const getCategories = () => {
-        fetch(`https://password-manager-ca92.onrender.com/categories`, {
-            credentials: 'include'
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                setCategories(data);
-            })
-            .catch(error => console.error('Error fetching passwords:', error));
-    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

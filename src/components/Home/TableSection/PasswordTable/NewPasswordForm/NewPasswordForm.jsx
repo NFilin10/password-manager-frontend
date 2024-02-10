@@ -11,10 +11,10 @@ const NewPasswordForm = ({ onClose }) => {
     const [link, setLink] = useState('');
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
-    const [categories, setCategories] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [logo, setLogo] = useState('');
 
+    const categories =  useCategoriesStore(state => state.categories)
     const fetchPasswords = usePasswordsStore(state => state.fetchPasswords)
 
     const fetchCategories = useCategoriesStore(state => state.fetchCategories)
@@ -22,20 +22,10 @@ const NewPasswordForm = ({ onClose }) => {
 
 
     useEffect(() => {
-        getCategories1();
+        fetchCategories();
     }, []);
 
-    const getCategories1 = () => {
-        fetch(`https://password-manager-ca92.onrender.com/categories`, {
-            credentials: 'include'
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-                setCategories(data);
-            })
-            .catch(error => console.error('Error fetching passwords:', error));
-    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

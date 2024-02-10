@@ -25,19 +25,6 @@ const Categories = () => {
     }, []);
 
 
-    // const getCategories = () => {
-    //     fetch(`http://localhost:8080/categories`, {
-    //         credentials: 'include'
-    //     })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             console.log("CAT DATA", data)
-    //             setCategories(data);
-    //         })
-    //         .catch(error => console.error('Error fetching passwords:', error));
-    // }
-
-
     const addCategory = () => {
 
         const data = {category: newCategoryName}
