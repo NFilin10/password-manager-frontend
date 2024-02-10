@@ -10,9 +10,9 @@ function App() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const checkAuth = async () => {
+        const checkAuth =  () => {
             try {
-                const isAuthenticated = await auth.authenticated();
+                const isAuthenticated =  auth.authenticated();
                 const currentPath = window.location.pathname;
 
                 if (!isAuthenticated && currentPath !== '/login' && currentPath !== '/signup') {
