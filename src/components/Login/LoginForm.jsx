@@ -19,11 +19,6 @@ const LoginForm = ({ setIsAuthenticated }) => {
     }
 
 
-    const routeChange = () =>{
-        let path = `/`;
-        navigate(path);
-    }
-
     const LoginIn = async (e) => {
         const data = { email: login, password: password };
 

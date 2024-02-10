@@ -16,24 +16,32 @@ const LoginForm = ({ setIsAuthenticated }) => {
 
 
     const signup = async (e) => {
-        const data = {name: name, surname: surname, email: email, password: password };
+        const data = { name: name, surname: surname, email: email, password: password };
 
         e.preventDefault();
 
         fetch("https://password-manager-ca92.onrender.com/auth/signup", {
             method: "POST",
-            headers: { "Content-Type": "application/json", },
+            headers: { "Content-Type": "application/json" },
             credentials: 'include',
             body: JSON.stringify(data)
         })
-            .then(() => {
-                setIsAuthenticated(true)
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        throw new Error("Unauthorized: Please check your credentials.");
+                    } else {
+                        throw new Error("Network response was not ok.");
+                    }
+                }
+                setIsAuthenticated(true);
             })
-            .catch(e => {
-                console.log(e);
-                console.log("error");
+            .catch(error => {
+                console.error("Error:", error.message);
+                // Handle the error appropriately, e.g., display an error message to the user
             });
     };
+
 
 
     return (
