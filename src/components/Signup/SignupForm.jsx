@@ -12,35 +12,49 @@ const LoginForm = ({ setIsAuthenticated }) => {
     const [name, setName] = useState('')
     const [surname, setSurname] = useState('')
     const [email, setEmail] = useState('')
-    const [password, serPassword] = useState('')
+    const [password, setPassword] = useState('')
 
+    const [image, setImage] = useState(null); // Add state for image
+
+    const [registered, setRegistered] = useState(null)
+
+
+    const handleImageChange = (e) => {
+        // Store the selected image file
+        setImage(e.target.files[0]);
+    };
 
     const signup = async (e) => {
-        const data = { name: name, surname: surname, email: email, password: password };
-
         e.preventDefault();
 
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('surname', surname);
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('image', image); // Append image data to the form data
+
         fetch("https://password-manager-ca92.onrender.com/auth/signup", {
+        // fetch("http://localhost:8080/auth/signup", {
+
             method: "POST",
-            headers: { "Content-Type": "application/json" },
             credentials: 'include',
-            body: JSON.stringify(data)
+            body: formData // Send form data which includes image
         })
             .then(response => {
                 if (!response.ok) {
-                    if (response.status === 401) {
-                        throw new Error("Unauthorized: Please check your credentials.");
-                    } else {
-                        throw new Error("Network response was not ok.");
-                    }
+                    return response.json().then(error => {
+                        throw new Error(error.error);
+                    });
                 }
                 setIsAuthenticated(true);
             })
             .catch(error => {
                 console.error("Error:", error.message);
-                // Handle the error appropriately, e.g., display an error message to the user
+                setRegistered(error.message);
             });
     };
+
 
 
 
@@ -56,7 +70,9 @@ const LoginForm = ({ setIsAuthenticated }) => {
                         <input className={Styles.input} onChange={(e) => setName(e.target.value)} type="text" name="name" placeholder="Name" required=""/>
                         <input className={Styles.input} onChange={(e) => setSurname(e.target.value)} type="text" name="surname" placeholder="Surname" required=""/>
                         <input className={Styles.input} onChange={(e) => setEmail(e.target.value)} type="email" name="email" placeholder="Email" required=""/>
-                        <input className={Styles.input} onChange={(e) => serPassword(e.target.value)} type="password" name="pswd" placeholder="Password" required=""/>
+                        <input className={Styles.input} onChange={(e) => setPassword(e.target.value)} type="password" name="pswd" placeholder="Password" required=""/>
+                        <input className={Styles.input} onChange={handleImageChange} type="file" accept="image/*" name="image" placeholder="Profile Image" required=""/>
+                        {registered && <h3>{registered}</h3>}
                         <button onClick={signup} className={Styles.button}>Sign up</button>
                     </form>
                 </div>

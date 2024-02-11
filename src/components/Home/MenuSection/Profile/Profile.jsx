@@ -3,21 +3,18 @@ import ProfileLogo from "../../../../assets/profileLogo.png";
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useState, useEffect } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Profile = ({ setIsAuthenticated }) => {
     const [open, setOpen] = useState(false);
-
     const menuRef = useRef();
     const imgRef = useRef();
-
-    const [name, setName] = useState('')
-    const [surname, setSurname] = useState('')
-
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [imageUrl, setImageUrl] = useState(''); // State to store the URL of the profile image
 
     useEffect(() => {
         getUser();
-
     }, []);
 
     useEffect(() => {
@@ -39,38 +36,48 @@ const Profile = ({ setIsAuthenticated }) => {
     }, []);
 
     const logout = async () => {
-            fetch("https://password-manager-ca92.onrender.com/auth/logout", {
-                credentials: 'include',
-            })
-                .then((response) => response.json())
-                .then(() => {
-                    setIsAuthenticated(false)
-                })
-                .catch((e) => {
-                    console.log("error logout", e);
-                });
-    }
+        fetch("https://password-manager-ca92.onrender.com/auth/logout", {
+        // fetch("http://localhost:8080/auth/logout", {
 
+            credentials: 'include',
+        })
+            .then((response) => response.json())
+            .then(() => {
+                setIsAuthenticated(false);
+            })
+            .catch((e) => {
+                console.log("error logout", e);
+            });
+    };
 
     const getUser = async () => {
         fetch("https://password-manager-ca92.onrender.com/user", {
+        // fetch("http://localhost:8080/user", {
             credentials: 'include',
         })
             .then((response) => response.json())
             .then((data) => {
-                setName(data[0].name)
-                setSurname(data[0].surname)
+                console.log("data", data);
+                setName(data[0].name);
+                setSurname(data[0].surname);
+                setImageUrl(data[0].image)
             })
             .catch((e) => {
                 console.log("error fetching user", e);
             });
-    }
+    };
 
 
     return (
         <div className={Styles.profileWrapper}>
             <div className={Styles.logoWrapper}>
-                <img src={ProfileLogo} alt="" />
+                {imageUrl ? (
+                <img src={"https://password-manager-ca92.onrender.com/"+imageUrl} alt="Profile" />
+                //     <img src={"http://localhost:8080/"+imageUrl} alt="Profile" />
+
+                ) : (
+                    <img src={ProfileLogo} alt="Profile" />
+                )}
             </div>
             <div className={Styles.content}>
                 <h4>{name} {surname}</h4>

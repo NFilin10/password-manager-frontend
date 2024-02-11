@@ -6,6 +6,7 @@ const usePasswordsStore = create((set) => ({
 
     fetchPasswords: () => {
         fetch(`https://password-manager-ca92.onrender.com`, {
+
             credentials: "include"
         })
             .then((res) => res.json())
