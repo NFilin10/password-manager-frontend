@@ -51,6 +51,21 @@
     outline: none;
     border-radius: 5px;
 }
+
+.inputFile{
+    width: 60%;
+    height: 40px;
+    background: #e0dede;
+    justify-content: center;
+    display: flex;
+    margin: 20px auto;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+
 .button{
     width: 60%;
     height: 40px;
@@ -72,7 +87,7 @@
     background: #6d44b8;
 }
 .login{
-    height: 460px;
+    height: 490px;
     background: #eee;
     border-radius: 60% / 10%;
     transform: translateY(-180px);

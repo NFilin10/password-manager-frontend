@@ -71,7 +71,7 @@ const LoginForm = ({ setIsAuthenticated }) => {
                         <input className={Styles.input} onChange={(e) => setSurname(e.target.value)} type="text" name="surname" placeholder="Surname" required=""/>
                         <input className={Styles.input} onChange={(e) => setEmail(e.target.value)} type="email" name="email" placeholder="Email" required=""/>
                         <input className={Styles.input} onChange={(e) => setPassword(e.target.value)} type="password" name="pswd" placeholder="Password" required=""/>
-                        <input className={Styles.input} onChange={handleImageChange} type="file" accept="image/*" name="image" placeholder="Profile Image" required=""/>
+                        <input className={Styles.inputFile} onChange={handleImageChange} type="file" accept="image/*" name="image" placeholder="Profile Image" required=""/>
                         {registered && <h3>{registered}</h3>}
                         <button onClick={signup} className={Styles.button}>Sign up</button>
                     </form>
