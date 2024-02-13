@@ -87,7 +87,7 @@ const Profile = ({ setIsAuthenticated }) => {
                     </span>
                     {open && (
                         <div ref={menuRef} className={Styles.dropdown}>
-                            <li onClick={logout}>Logout</li>
+                            <li className={"logoutOption"} onClick={logout}>Logout</li>
                         </div>
                     )}
                 </div>
