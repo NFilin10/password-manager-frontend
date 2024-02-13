@@ -67,11 +67,11 @@ const LoginForm = ({ setIsAuthenticated }) => {
                 <div className="signup">
                     <form>
                         <label className={Styles.label} htmlFor="chk" aria-hidden="true">Sign up</label>
-                        <input className={Styles.input} onChange={(e) => setName(e.target.value)} type="text" name="name" placeholder="Name" required=""/>
-                        <input className={Styles.input} onChange={(e) => setSurname(e.target.value)} type="text" name="surname" placeholder="Surname" required=""/>
-                        <input className={Styles.input} onChange={(e) => setEmail(e.target.value)} type="email" name="email" placeholder="Email" required=""/>
-                        <input className={Styles.input} onChange={(e) => setPassword(e.target.value)} type="password" name="pswd" placeholder="Password" required=""/>
-                        <input className={Styles.inputFile} onChange={handleImageChange} type="file" accept="image/*" name="image" placeholder="Profile Image" required=""/>
+                        <input className={Styles.input} onChange={(e) => setName(e.target.value)} type="text" name="name" placeholder="Name" />
+                        <input className={Styles.input} onChange={(e) => setSurname(e.target.value)} type="text" name="surname" placeholder="Surname" />
+                        <input className={Styles.input} onChange={(e) => setEmail(e.target.value)} type="email" name="email" placeholder="Email" />
+                        <input className={Styles.input} onChange={(e) => setPassword(e.target.value)} type="password" name="pswd" placeholder="Password" />
+                        <input className={Styles.inputFile} onChange={handleImageChange} type="file" accept="image/*" name="image" placeholder="Profile Image"/>
                         {registered && <h3>{registered}</h3>}
                         <button onClick={signup} className={Styles.button}>Sign up</button>
                     </form>

@@ -58,8 +58,8 @@ const LoginForm = ({ setIsAuthenticated }) => {
                 <div className="login">
                     <form>
                         <label className={Styles.label} htmlFor="chk" aria-hidden="true">Login</label>
-                        <input className={Styles.input} onChange={(e) => setLogin(e.target.value)} type="email" name="email" placeholder="Email" required=""/>
-                        <input className={Styles.input} onChange={(e) => setPassword(e.target.value)} type="password" name="pswd" placeholder="Password" required=""/>
+                        <input className={Styles.input} onChange={(e) => setLogin(e.target.value)} type="email" name="email" placeholder="Email" />
+                        <input className={Styles.input} onChange={(e) => setPassword(e.target.value)} type="password" name="pswd" placeholder="Password" />
                         <button onClick={LoginIn} className={Styles.button}>Login</button>
                         <button onClick={routeChangeSignUp} className={Styles.button}>Signup</button>
 
