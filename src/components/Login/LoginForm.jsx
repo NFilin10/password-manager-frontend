@@ -40,8 +40,6 @@ const LoginForm = ({ setIsAuthenticated }) => {
 
             setIsAuthenticated(true)
 
-            // Redirect only when login is successful
-            // routeChange();
         } catch (error) {
             console.error(error);
             console.log("error");

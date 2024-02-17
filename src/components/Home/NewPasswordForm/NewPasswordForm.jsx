@@ -14,6 +14,27 @@ const NewPasswordForm = ({ onClose }) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [logo, setLogo] = useState('');
 
+    const [formError, setFormError] = useState({
+        website: '',
+        login: '',
+        password: ''
+    })
+
+    function validateForm(){
+        const errors = {};
+        if (!website.trim()) {
+            errors.website = "Website is required";
+        }
+        if (!login.trim()) {
+            errors.login = "Login is required";
+        }
+        if (!password.trim()) {
+            errors.password = "Password is required";
+        }
+        setFormError(errors);
+    }
+
+
     const categories =  useCategoriesStore(state => state.categories)
     const fetchPasswords = usePasswordsStore(state => state.fetchPasswords)
 
@@ -28,6 +49,10 @@ const NewPasswordForm = ({ onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
 
         const data = {
             website: website,
@@ -76,6 +101,8 @@ const NewPasswordForm = ({ onClose }) => {
                                         value={website}
                                         onChange={(e) => setWebsite(e.target.value)}
                                     />
+                                    {formError.website && <p className={Styles.error}>{formError.website}</p>}
+
                                 </div>
                                 <div>
                                     <input
@@ -97,6 +124,7 @@ const NewPasswordForm = ({ onClose }) => {
                                         value={login}
                                         onChange={(e) => setLogin(e.target.value)}
                                     />
+                                    {formError.login && <p className={Styles.error}>{formError.login}</p>}
                                 </div>
                                 <div>
                                     <input
@@ -106,6 +134,7 @@ const NewPasswordForm = ({ onClose }) => {
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
+                                    {formError.password && <p className={Styles.error}>{formError.password}</p>}
                                 </div>
                             </div>
 
